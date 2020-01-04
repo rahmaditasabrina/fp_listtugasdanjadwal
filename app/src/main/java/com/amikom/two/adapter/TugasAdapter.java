@@ -35,17 +35,15 @@ import java.util.List;
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final TugasAdapter.ViewHolder viewHolder, final int i) {
+        public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
             final Tugas tugas = this.tugas.get(i);
             viewHolder.tvMatakuliah.setText(tugas.getMatakuliah());
-            viewHolder.tvJumlahhadir.setText(tugas.getJumlahhadir());
+            viewHolder.tvJenistugas.setText(tugas.getJenistugas());
+            viewHolder.tvKeterangan.setText(tugas.getKeterangan());
+            viewHolder.tvTanggalpengumpulan.setText(tugas.getTanggalpengumpulan());
+            viewHolder.tvJampengumpulan.setText(tugas.getJampengumpulan());
 
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(null, viewHolder.itemView, i, i);
-                }
-            });
+            viewHolder.itemView.setOnClickListener(v -> listener.onItemClick(null, viewHolder.itemView, i, i));
         }
 
         @Override
@@ -53,15 +51,21 @@ import java.util.List;
             return tugas.size();
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView tvMatakuliah;
-            public TextView tvJumlahhadir;
+         class ViewHolder extends RecyclerView.ViewHolder {
+             TextView tvMatakuliah;
+             TextView tvJenistugas;
+             TextView tvKeterangan;
+             TextView tvTanggalpengumpulan;
+             TextView tvJampengumpulan;
 
-            public ViewHolder(@NonNull View itemView) {
+             ViewHolder(@NonNull View itemView) {
                 super(itemView);
-                tvMatakuliah = itemView.findViewById(R.id.jadwal_matkul);
-                tvJumlahhadir = itemView.findViewById(R.id.jumlah_hadir);
-                           }
+                tvMatakuliah = itemView.findViewById(R.id.matakuliah);
+                tvJenistugas = itemView.findViewById(R.id.jenis_tugas);
+                tvKeterangan = itemView.findViewById(R.id.keterangan);
+                tvTanggalpengumpulan= itemView.findViewById(R.id.tanggal_kumpul);
+                tvJampengumpulan = itemView.findViewById(R.id.jam_kumpul);
+            }
         }
     }
 

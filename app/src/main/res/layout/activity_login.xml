@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,13 +15,15 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="NIM"/>
+            android:text="Usename"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
 
         <EditText
-            android:id="@+id/edt_nim"
+            android:id="@+id/edt_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:textSize="15sp"/>
 
     </LinearLayout>
 
@@ -34,13 +35,14 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="PASSWORD"/>
+            android:text="Password"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
 
         <EditText
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
@@ -48,8 +50,9 @@
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="LOGIN"
         android:textColor="#f00"
-        android:textStyle="bold|italic"
-        android:text="Login"/>
+        android:textSize="20sp"
+        android:textStyle="bold|italic" />
 
 </LinearLayout>

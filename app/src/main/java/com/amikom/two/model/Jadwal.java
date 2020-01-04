@@ -33,10 +33,6 @@ public class Jadwal {
     @ColumnInfo(name = "dosen")
     private String dosen;
 
-    public Jadwal() {
-
-    }
-
     public Jadwal(String hari, String jam, String ruangan, String mataKuliah, String dosen) {
         this.hari = hari;
         this.jam = jam;

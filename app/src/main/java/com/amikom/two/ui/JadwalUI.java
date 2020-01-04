@@ -1,5 +1,6 @@
 package com.amikom.two.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,9 +26,9 @@ import com.amikom.two.room.JadwalRoom;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class JadwalUI extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
-    private RecyclerView recyclerView;
     private JadwalAdapter jadwalAdapter;
     private List<Jadwal> list = new ArrayList<>();
     // private JadwalDAO jadwalDAO;
@@ -37,18 +38,19 @@ public class JadwalUI extends Fragment implements View.OnClickListener, AdapterV
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // jadwalDAO = new JadwalDAO();
-        jadwalRoom = JadwalDatabase.db(getContext()).jadwalRoom();
+        jadwalRoom = JadwalDatabase.db(Objects.requireNonNull(getContext())).jadwalRoom();
         // list = jadwalDAO.selectAll();
         list = jadwalRoom.selectAll();
         jadwalAdapter = new JadwalAdapter(getContext(), list, this);
     }
 
 
+    @SuppressLint("WrongConstant")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ui_jadwal, container, false);
-        recyclerView = view.findViewById(R.id.recycler_jadwal);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_jadwal);
         recyclerView.setAdapter(jadwalAdapter);
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         llm.setOrientation(LinearLayout.VERTICAL);

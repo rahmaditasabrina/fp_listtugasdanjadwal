@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.amikom.two.R;
 import com.amikom.two.model.Jadwal;
-
 import java.util.List;
 
 public class JadwalAdapter extends RecyclerView.Adapter<JadwalAdapter.ViewHolder> {
@@ -44,12 +43,7 @@ public class JadwalAdapter extends RecyclerView.Adapter<JadwalAdapter.ViewHolder
         viewHolder.tvRuangan.setText(jadwal.getRuangan());
         viewHolder.tvDosen.setText(jadwal.getDosen());
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onItemClick(null, viewHolder.itemView, i, i);
-            }
-        });
+        viewHolder.itemView.setOnClickListener(v -> listener.onItemClick(null, viewHolder.itemView, i, i));
     }
 
     @Override
@@ -57,14 +51,14 @@ public class JadwalAdapter extends RecyclerView.Adapter<JadwalAdapter.ViewHolder
         return jadwal.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvHari;
-        public TextView tvMakul;
-        public TextView tvJam;
-        public TextView tvRuangan;
-        public TextView tvDosen;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tvHari;
+        TextView tvMakul;
+        TextView tvJam;
+        TextView tvRuangan;
+        TextView tvDosen;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvHari = itemView.findViewById(R.id.jadwal_hari);
             tvMakul = itemView.findViewById(R.id.jadwal_makul);

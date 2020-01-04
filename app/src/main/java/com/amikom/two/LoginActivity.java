@@ -10,10 +10,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
-    EditText edtNim;
+    EditText edtUsename;
     EditText edtPassword;
     Button btnLogin;
-    String nim = "18.02.0245";
+    String username = "18.02.0245";
     String password = "1234";
 
     @Override
@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Log.e("onCreate", "mulai");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        edtNim = findViewById(R.id.edt_nim);
+        edtUsename = findViewById(R.id.edt_username);
         edtPassword = findViewById(R.id.edt_password);
         btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(this);
@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         Log.e("onClick", "mulai");
-        if (nim.equals(edtNim.getText().toString())
+        if (username.equals(edtUsename.getText().toString())
             && password.equals(edtPassword.getText().toString()) ) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);

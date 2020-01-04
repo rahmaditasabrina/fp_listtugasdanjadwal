@@ -1,9 +1,6 @@
 package com.amikom.two.room;
-
 import com.amikom.two.model.Jadwal;
-
 import java.util.List;
-
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;

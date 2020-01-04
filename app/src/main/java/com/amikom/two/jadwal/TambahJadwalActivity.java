@@ -1,5 +1,6 @@
 package com.amikom.two.jadwal;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class TambahJadwalActivity extends AppCompatActivity implements View.OnCl
     JadwalRoom jadwalRoom;
     int id;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +50,12 @@ public class TambahJadwalActivity extends AppCompatActivity implements View.OnCl
             edtDosen.setText(jadwal.getDosen());
             btnTambah.setText("Update Jadwal");
             btnHapus.setVisibility(View.VISIBLE);
-            btnHapus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Jadwal jadwal = jadwalRoom.select(id);
-                    jadwalRoom.delete(jadwal);
-                    Intent result = new Intent();
-                    setResult(Activity.RESULT_OK, result);
-                    finish();
-                }
+            btnHapus.setOnClickListener(v -> {
+                Jadwal jadwal1 = jadwalRoom.select(id);
+                jadwalRoom.delete(jadwal1);
+                Intent result = new Intent();
+                setResult(Activity.RESULT_OK, result);
+                finish();
             });
         }
     }
@@ -64,7 +63,7 @@ public class TambahJadwalActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         Intent result = new Intent();
-        Jadwal jadwal = new Jadwal();
+        Jadwal jadwal = new Jadwal("","","","","");
         if (id != 0) {
             jadwal = jadwalRoom.select(id);
         }

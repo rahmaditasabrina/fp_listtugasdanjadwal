@@ -9,12 +9,8 @@ public class JadwalDAO {
     private List<Jadwal> list = new ArrayList<>();
 
     public JadwalDAO() {
-        list.add(new Jadwal("Rabu", "13.20-15.00",
-                "2.4.1", "Mobile Programming II",
-                "Afrig Aminuddin"));
-        list.add(new Jadwal("Rabu", "13.20-15.00",
-                "2.4.1", "Mobile Programming II",
-                "Afrig Aminuddin"));
+        list.add(new Jadwal("","", "","", ""));
+
     }
 
     public void insert(Jadwal jadwal) {

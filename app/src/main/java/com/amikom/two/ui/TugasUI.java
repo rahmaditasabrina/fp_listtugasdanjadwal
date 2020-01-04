@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.amikom.two.model.Tugas;
-import com.amikom.two.room.TugasDatabase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,42 +19,41 @@ import android.widget.Toast;
 
 import com.amikom.two.R;
 import com.amikom.two.adapter.TugasAdapter;
-import com.amikom.two.jadwal.TambahJadwalActivity;
 import com.amikom.two.jadwal.TambahTugasActivity;
-
+import com.amikom.two.model.Tugas;
+import com.amikom.two.room.TugasDatabase;
+import com.amikom.two.room.TugasRoom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-    public class TugasUI extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
-        private RecyclerView recyclerView;
-        private TugasAdapter TugasAdapter;
+public class TugasUI extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+        private TugasAdapter tugasAdapter;
         private List<Tugas> list = new ArrayList<>();
-        // private JadwalDAO jadwalDAO;
-//        private TugasRoom presensiRoom;
-        TugasDatabase tugasDatabase;
+        private TugasRoom tugasRoom;
+
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             // jadwalDAO = new JadwalDAO();
-            tugasDatabase = TugasDatabase.db(getContext());
+            tugasRoom = TugasDatabase.db(Objects.requireNonNull(getContext())).tugasRoom();
             // list = jadwalDAO.selectAll();
-            list = tugasDatabase.presensiRoom().selectAll();
-            TugasAdapter = new TugasAdapter(getContext(), list, this);
+            list = tugasRoom.selectAll();
+            tugasAdapter = new TugasAdapter(getContext(), list, this);
         }
-
 
         @SuppressLint("WrongConstant")
         @Nullable
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.ui_tugas, container, false);
-            recyclerView = view.findViewById(R.id.recycler_jadwal);
-            recyclerView.setAdapter(TugasAdapter);
+            RecyclerView recyclerView = view.findViewById(R.id.recycler_tugas);
+            recyclerView.setAdapter(tugasAdapter);
             LinearLayoutManager llm = new LinearLayoutManager(getContext());
             llm.setOrientation(LinearLayout.VERTICAL);
             recyclerView.setLayoutManager(llm);
-            FloatingActionButton fab = view.findViewById(R.id.fab_jadwal);
+            FloatingActionButton fab = view.findViewById(R.id.fab_tugas);
             fab.setOnClickListener(this);
             return view;
         }
@@ -73,8 +69,8 @@ import java.util.List;
             super.onActivityResult(requestCode, resultCode, data);
             if (resultCode == Activity.RESULT_OK) {
                 list.clear();
-                list.addAll(tugasDatabase.presensiRoom().selectAll());
-                TugasAdapter.notifyDataSetChanged();
+                list.addAll(tugasRoom.selectAll());
+                tugasAdapter.notifyDataSetChanged();
             }
         }
 
@@ -83,7 +79,7 @@ import java.util.List;
             Tugas tugas = list.get(position);
             Toast.makeText(getContext(), tugas.getMatakuliah(), Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(getContext(), TambahJadwalActivity.class);
+            Intent intent = new Intent(getContext(), TambahTugasActivity.class);
             intent.putExtra("id", tugas.getId());
             startActivityForResult(intent, 50);
         }

@@ -7,15 +7,14 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.amikom.two.model.Tugas;
-
 import java.util.List;
 
 @Dao
     public interface TugasRoom {
 
-        @Query("SELECT * FROM Tugas WHERE id = :id")
+        @Query("SELECT * FROM tugas WHERE id = :id")
         Tugas select(int id);
-        @Query("SELECT * FROM Tugas")
+        @Query("SELECT * FROM tugas")
          List<Tugas> selectAll();
 
         @Insert

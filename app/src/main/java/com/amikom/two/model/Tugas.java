@@ -21,17 +21,24 @@ public class Tugas {
     @ColumnInfo(name = "matakuliah")
     public String matakuliah;
 
-    @ColumnInfo(name = "jumlahhadir")
-    public String jumlahhadir;
+    @ColumnInfo(name = "jenistugas")
+    private String jenistugas;
 
+    @ColumnInfo(name = "keterangan")
+    private String keterangan;
 
-    public Tugas() {
+    @ColumnInfo(name = "tanggalpengumpulan")
+    private String tanggalpengumpulan;
 
-    }
+    @ColumnInfo(name = "jampengumpulan")
+    private String jampengumpulan;
 
-    public Tugas(String matakuliah, String jumlahhadir) {
+    public Tugas(String matakuliah, String jenistugas, String keterangan, String tanggalpengumpulan, String jampengumpulan) {
         this.matakuliah = matakuliah;
-        this.jumlahhadir = jumlahhadir;
+        this.jenistugas = jenistugas;
+        this.keterangan = keterangan;
+        this.tanggalpengumpulan = tanggalpengumpulan;
+        this.jampengumpulan = jampengumpulan;
 
     }
 
@@ -43,11 +50,25 @@ public class Tugas {
         this.matakuliah = matakuliah;
     }
 
-    public String getJumlahhadir() {
-        return jumlahhadir;
+    public String getJenistugas() { return jenistugas;}
+
+    public void setJenistugas(String jenistugas) {
+        this.jenistugas = jenistugas;
     }
 
-    public void setJumlahhadir(String jumlahhadir) {
-        this.jumlahhadir = jumlahhadir;
+    public String getKeterangan() { return keterangan;}
+
+    public void setKeterangan(String keterangan) {
+        this.keterangan = keterangan;
+    }
+
+    public String getTanggalpengumpulan() { return tanggalpengumpulan;}
+
+    public void setTanggalpengumpulan(String tanggalpengumpulan) { this.tanggalpengumpulan = tanggalpengumpulan;}
+
+    public String getJampengumpulan() { return jampengumpulan;}
+
+    public void setJampengumpulan(String jampengumpulan) {
+        this.jampengumpulan = jampengumpulan;
     }
 }

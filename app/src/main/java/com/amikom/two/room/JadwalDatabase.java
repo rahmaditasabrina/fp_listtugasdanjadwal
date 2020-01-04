@@ -11,14 +11,12 @@ import androidx.room.RoomDatabase;
 @Database(entities = {Jadwal.class}, version = 1, exportSchema = false)
 public abstract class JadwalDatabase extends RoomDatabase {
     public abstract JadwalRoom jadwalRoom();
-//    public abstract TugasRoom presensiRoom();
     public static JadwalDatabase db(Context context) {
         return Room.databaseBuilder(
                 context.getApplicationContext(),
-                JadwalDatabase.class, "amikom")
+                JadwalDatabase.class, "jadwal")
                 .allowMainThreadQueries()
                 .build();
     }
-
 
 }

@@ -4,8 +4,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.core.app.NotificationCompat;
-
+import com.amikom.two.ui.DosenUI;
+import com.amikom.two.ui.MatakuliahUI;
+import com.amikom.two.ui.TugasUI;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -18,29 +19,28 @@ import android.view.MenuItem;
 import com.amikom.two.ui.HomeUI;
 import com.amikom.two.ui.JadwalUI;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -56,25 +56,25 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        int id = menuItem.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(menuItem);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        int id = menuItem.getItemId();
 
         Fragment fragment = null;
         Class clz = null;
@@ -83,17 +83,19 @@ public class MainActivity extends AppCompatActivity
             clz = HomeUI.class;
         } else if (id == R.id.nav_jadwal) {
             clz = JadwalUI.class;
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+        } else if (id == R.id.nav_tugas) {
+            clz = TugasUI.class;
+        } else if (id == R.id.nav_matakuliah) {
+            clz = MatakuliahUI.class;
+        } else if (id == R.id.nav_dosen){
+            clz = DosenUI.class;
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
         }
 
         try {
+            assert clz != null;
             fragment = (Fragment) clz.newInstance();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -107,10 +109,8 @@ public class MainActivity extends AppCompatActivity
         } else {
 
         }
-
-        toolbar.setSubtitle(item.getTitle());
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toolbar.setSubtitle(menuItem.getTitle());
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
